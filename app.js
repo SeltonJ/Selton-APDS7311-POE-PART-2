@@ -13,8 +13,8 @@ mongoose
   .then(()=> console.log('Db connected...'));
   
 
-//Middleware
-app.use(cors({origin:'https://localhost:3000', optionsSuccessStatus: 200}))
+// Middleware
+app.use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
 app.use(express.json());
 app.use(hsts);
 
@@ -26,16 +26,16 @@ app.use('/api/post', require("./routes/post"));
 app.use((reg,res,next)=>
 {
  res.setHeader('Access-Control-Allow-Origin', '*');
- res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,ContentType,Accept,Authorization');
+ res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
  res.setHeader('Access-Control-Allow-Methods', '*');
  next();
 });
 
 https.createServer(
   {
-    key: fs.readFileSync('./keys/privatekey.pem'),
-    cert: fs.readFileSync('./keys/certificate.pem'),
-    passphrase: 'friedgreentomatoes',
+    //key: fs.readFileSync('./keys/privatekey.pem', 'utf8'),
+    //cert: fs.readFileSync('./keys/certificate.pem', 'utf8'),
+    //passphrase: '213456Selton',
   },
   app
 

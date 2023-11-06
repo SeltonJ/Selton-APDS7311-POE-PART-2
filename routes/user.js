@@ -3,9 +3,12 @@ const router = express.Router();
 const {User, validateUser} = require('../models/user');
 const {hasPassword} = require('../utils/hash');
 const auth = require('../middleware/auth')
+const ExpressBrute = require('express-brute');
+const store = new ExpressBrute.MemoryStore();
+const bruteforce = new ExpressBrute(store);
 
 //create new user
-router.post('/', async (req, res) => {
+router.post('/', bruteforce.prevent, async (req, res) => {
     const {error} = validateUser(req.body);
     if(error) return res.status(400).json(error.details[0].message);
     
